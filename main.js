@@ -30,7 +30,7 @@ function createWindow() {
 
 	window.loadURL(`file://${__dirname}/index.html`);
 
-	const development = false;
+	const development = true;
 	if (development) {
 		devMenu.setDevMenu();
 		window.openDevTools();
