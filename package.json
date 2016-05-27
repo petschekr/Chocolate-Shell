@@ -1,0 +1,33 @@
+{
+  "name": "chocolate-shell",
+  "version": "1.0.0-alpha",
+  "description": "A simple, modern, cross platform SSH client with tabs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petschekr/Chocolate-Shell.git"
+  },
+  "keywords": [
+    "ssh",
+    "ssh2",
+    "secure",
+    "shell",
+    "tabs"
+  ],
+  "author": "Ryan Petschek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/petschekr/Chocolate-Shell/issues"
+  },
+  "homepage": "https://github.com/petschekr/Chocolate-Shell#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.0"
+  },
+  "dependencies": {
+    "nedb": "^1.8.0",
+    "ssh2": "^0.5.0"
+  }
+}
