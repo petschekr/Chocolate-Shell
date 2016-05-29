@@ -39,6 +39,16 @@ function createWindow() {
 		window.setMenu(null);
 	}
 
+	// Handle events for the main window
+	window.on("blur", () => {
+		window.webContents.send("activity", "blur");
+	});
+	window.on("focus", () => {
+		window.webContents.send("activity", "focus");
+	});
+	window.on("resize", () => {
+		window.webContents.send("activity", "resize");
+	});
 	window.on("close", () => {
 		mainWindowState.saveState(window);
 	});
@@ -47,13 +57,6 @@ function createWindow() {
 	});
 }
 app.on("ready", createWindow);
-
-app.on("browser-window-blur", () => {
-	window.webContents.send("activity", "blur");
-});
-app.on("browser-window-focus", () => {
-	window.webContents.send("activity", "focus");
-});
 
 
 // Quit when all windows are closed.
