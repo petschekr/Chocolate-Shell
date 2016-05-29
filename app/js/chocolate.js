@@ -1,5 +1,42 @@
-var Client = require("ssh2").Client;
+const Terminal = require("xterm");
+const ssh2 = require("ssh2");
+
+const Client = ssh2.Client;
 var conn = new Client();
+
+// From xterm.js' fit addon
+Terminal.prototype.proposeGeometry = function () {
+	var term = this;
+    var parentElementStyle = window.getComputedStyle(term.element.parentElement),
+        parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height')),
+        parentElementWidth = parseInt(parentElementStyle.getPropertyValue('width')),
+        elementStyle = window.getComputedStyle(term.element),
+        elementPaddingVer = parseInt(elementStyle.getPropertyValue('padding-top')) + parseInt(elementStyle.getPropertyValue('padding-bottom')),
+        elementPaddingHor = parseInt(elementStyle.getPropertyValue('padding-right')) + parseInt(elementStyle.getPropertyValue('padding-left')),
+        availableHeight = parentElementHeight - elementPaddingVer,
+        availableWidth = parentElementWidth - elementPaddingHor,
+        container = term.rowContainer,
+        subjectRow = term.rowContainer.firstElementChild,
+        contentBuffer = subjectRow.innerHTML,
+        characterHeight,
+        rows,
+        characterWidth,
+        cols,
+        geometry;
+
+    subjectRow.style.display = 'inline';
+    subjectRow.innerHTML = 'W'; // Common character for measuring width, although on monospace
+    characterWidth = subjectRow.getBoundingClientRect().width;
+    subjectRow.style.display = ''; // Revert style before calculating height, since they differ.
+    characterHeight = parseInt(subjectRow.offsetHeight);
+    subjectRow.innerHTML = contentBuffer;
+
+    rows = parseInt(availableHeight / characterHeight);
+    cols = parseInt(availableWidth / characterWidth) - 1;
+
+    geometry = { cols: cols, rows: rows };
+    return geometry;
+};
 
 let streamSSH;
 
@@ -23,10 +60,9 @@ conn.on("ready", function () {
 	});
 });
 
-
 var term = new Terminal({
 	cols: 100,
-	rows: 30	,
+	rows: 30,
 	useStyle: true,
 	screenKeys: true,
 	cursorBlink: true
@@ -44,8 +80,11 @@ term.on("data", (data) => {
 term.on("title", (title) => {
 	// Change title
 });
-term.open(document.getElementsByClassName("content")[0]);
 
-term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
+term.open(document.getElementById("terminal-container"));
+var geometry = term.proposeGeometry();
+term.resize(geometry.cols, geometry.rows);
+
+term.write('\x1b[31mExample terminal!\x1b[m\r\n');
 
 conn.connect({});

@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<!-- Title is handled by main.js -->
+		<link rel="stylesheet" href="../node_modules/xterm/src/xterm.css" />
+		<link rel="stylesheet" href="css/chocolate.css" />
 		<style>
-			html, body {
+			/*html, body {
 				height: 100%;
 				width: 100%;
 				margin: 0;
@@ -18,13 +20,16 @@
 				width: 100%;
 				height: calc(100% - 30px);
 				background-color: white;
-			}
+			}*/
 		</style>
-		<script src="../node_modules/term.js/src/term.js"></script>
+		<script src="../node_modules/xterm/src/xterm.js"></script>
+		<script src="../node_modules/xterm/addons/fit/fit.js"></script>
 		<script src="js/chocolate.js" defer></script>
 	</head>
 	<body>
-		<section class="tabs"></section>
-		<section class="content"></section>
+		<!--<section class="tabs"></section>-->
+		<!--<section class="content">-->
+			<div id="terminal-container"></div>
+		<!--</section>-->
 	</body>
 </html>
