@@ -29,7 +29,8 @@ for (let cssFile of cssFiles) {
 			
 			less.render(data, {
 				"paths": [baseDir],
-				"filename": path.basename(cssFile)
+				"filename": path.basename(cssFile),
+				"strictMath": true
 			}, function (err, output) {
 				if (err) return reject(err);
 				
