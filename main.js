@@ -28,7 +28,7 @@ function createWindow() {
         window.maximize();
     }
 
-	window.loadURL(`file://${__dirname}/index.html`);
+	window.loadURL(`file://${__dirname}/app/index.html`);
 
 	const development = true;
 	if (development) {
