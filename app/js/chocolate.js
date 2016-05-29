@@ -1,5 +1,6 @@
 const Terminal = require("xterm");
 const ssh2 = require("ssh2");
+const {ipcRenderer} = require("electron");
 
 const Client = ssh2.Client;
 var conn = new Client();
@@ -84,6 +85,19 @@ term.on("title", (title) => {
 term.open(document.getElementById("terminal-container"));
 var geometry = term.proposeGeometry();
 term.resize(geometry.cols, geometry.rows);
+
+ipcRenderer.on("activity", (event, message) => {
+	// The blur attribute is applied to the container instead of the cursor itself
+	// because the cursor is constantly deleted and readded by xterm.js
+	var container = document.getElementById("terminal-container");
+	
+	if (message === "focus") {
+		container.classList.remove("blur");
+	}
+	if (message === "blur") {
+		container.classList.add("blur");
+	}
+});
 
 term.write('\x1b[31mExample terminal!\x1b[m\r\n');
 

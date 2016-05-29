@@ -48,6 +48,14 @@ function createWindow() {
 }
 app.on("ready", createWindow);
 
+app.on("browser-window-blur", () => {
+	window.webContents.send("activity", "blur");
+});
+app.on("browser-window-focus", () => {
+	window.webContents.send("activity", "focus");
+});
+
+
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
 	// OS X is special
