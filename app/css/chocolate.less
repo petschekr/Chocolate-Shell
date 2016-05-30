@@ -17,12 +17,13 @@ html, body {
 	width: 100%;
 	background-color: @background-inactive;
 	border-bottom: @bottom-border-size solid @border-inactive;
+	-webkit-user-select: none;
 }
 .content {
 	height: calc(100% - @tab-height);
 	width: 100%;
 	background-color: @background-active;
-	padding-top: @content-top-padding;
+	padding: @content-padding;
 }
 .tab {
 	height: 100%;
@@ -32,12 +33,14 @@ html, body {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	border-left: @inactive-border-size solid @border-inactive;	
+	
+	-webkit-user-select: none;
+	cursor: default;	
 	
 	font-size: @title-size;
 	color: @text-inactive;
-	
 	background-color: @background-inactive;
+	border-left: @inactive-border-size solid @border-inactive;
 		
 	&.active {
 		color: @text-active;
