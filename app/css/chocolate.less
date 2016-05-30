@@ -1,5 +1,12 @@
 @import "./themes/default";
 
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
 html, body {
 	height: 100%;
 	width: 100%;
@@ -12,7 +19,7 @@ html, body {
 	border-bottom: @bottom-border-size solid @border-inactive;
 }
 .content {
-	height: calc(100% - ((@tab-height + @content-top-padding + @bottom-border-size)));
+	height: calc(100% - @tab-height);
 	width: 100%;
 	background-color: @background-active;
 	padding-top: @content-top-padding;
@@ -37,6 +44,7 @@ html, body {
 		background-color: @background-active;
 		border-left: @active-border-size solid @border-active;
 		border-bottom: @inactive-border-size solid rgba(0, 0, 0, 0);
+		box-sizing: initial;
 	}
 	&:last-of-type {
 		border-right: 1px solid @border-inactive;
