@@ -46,8 +46,12 @@ function createWindow() {
 	window.on("focus", () => {
 		window.webContents.send("activity", "focus");
 	});
+	let resizeTimer = null;
 	window.on("resize", () => {
-		window.webContents.send("activity", "resize");
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function () {
+			window.webContents.send("activity", "resize");
+		}, 500);
 	});
 	window.on("close", () => {
 		mainWindowState.saveState(window);

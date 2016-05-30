@@ -43,7 +43,10 @@ let streamSSH;
 
 conn.on("ready", function () {
 	console.log("Client is ready");
-	conn.shell(function (err, stream) {
+	conn.shell({
+		cols: term.cols,
+		rows: term.rows
+	}, function (err, stream) {
 		if (err) throw err;
 		streamSSH = stream;
 		stream.on("close", function () {
@@ -62,8 +65,8 @@ conn.on("ready", function () {
 });
 
 var term = new Terminal({
-	cols: 100,
-	rows: 30,
+	cols: 0,
+	rows: 0,
 	useStyle: true,
 	screenKeys: true,
 	cursorBlink: true
@@ -83,8 +86,18 @@ term.on("title", (title) => {
 });
 
 term.open(document.getElementById("terminal-container"));
-var geometry = term.proposeGeometry();
-term.resize(geometry.cols, geometry.rows);
+
+function resize () {
+	var geometry = term.proposeGeometry();
+	term.resize(geometry.cols, geometry.rows);
+	// To resize after connection is started:
+	// stream.setWindow() (see https://github.com/mscdex/ssh2/blob/23bd66f723d2c72c007ed7a3b3afb9f50284bac4/lib/Channel.js#L382)
+	if (streamSSH) {
+		// Height and width are set to the defaults because their values don't seem to actually matter
+		streamSSH.setWindow(geometry.rows, geometry.cols, 480, 640);
+	}
+}
+resize();
 
 ipcRenderer.on("activity", (event, message) => {
 	// The blur attribute is applied to the container instead of the cursor itself
@@ -96,6 +109,9 @@ ipcRenderer.on("activity", (event, message) => {
 	}
 	if (message === "blur") {
 		container.classList.add("blur");
+	}
+	if (message === "resize") {
+		resize();
 	}
 });
 
