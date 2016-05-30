@@ -1,5 +1,52 @@
 @import "./themes/default";
 
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+.tabs {
+	height: @tab-height;
+	width: 100%;
+	background-color: @background-inactive;
+	border-bottom: 1px solid @border-inactive;
+}
+.content {
+	height: calc(100% - @tab-height);
+	width: 100%;
+	background-color: @background-active;
+	padding-top: 10px;
+}
+.tab {
+	height: 100%;
+	width: @tab-width;
+	margin-right: -5px;
+	
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-left: 1px solid @border-inactive;	
+	
+	font-size: @title-size;
+	color: @text-inactive;
+	
+	background-color: @background-inactive;
+		
+	&.active {
+		color: @text-active;
+		background-color: @background-active;
+		border-left: 2px solid @border-active;
+		border-bottom: 1px solid rgba(0, 0, 0, 0);
+	}
+	&:last-of-type {
+		border-right: 1px solid @border-inactive;
+	}
+}
+// Temporary
+#terminal-container {
+	border: 1px solid white;
+}
+
 /* From xterm.js demo */
 body {
 	font-family: helvetica, sans-serif, arial;
