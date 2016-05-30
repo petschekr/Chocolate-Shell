@@ -22,7 +22,8 @@ function createWindow() {
 		"center": true,
 		"min-width": 800,
 		"min-height": 400,
-		"title": "Chocolate Shell"
+		"title": "Chocolate Shell",
+		"icon": "resources/icons/Chocolate Shell.ico"
 	});
 	if (mainWindowState.isMaximized) {
         window.maximize();
