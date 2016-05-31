@@ -22,7 +22,6 @@ class Session extends Tab {
 		terminalContainer.id = this.id;
 		document.querySelector("section.content").appendChild(terminalContainer);
 		
-		this.setActive();
 		this.terminal.open(terminalContainer);
 		this.resize();
 		
