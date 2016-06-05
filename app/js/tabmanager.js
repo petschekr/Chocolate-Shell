@@ -5,6 +5,9 @@ class Tab {
 		this.title = title || "Untitled";
 		this.id = crypto.randomBytes(16).toString("hex");
 	}
+	close () {
+		// Implemented by subclasses
+	}
 }
 
 class TabManager {
@@ -24,19 +27,13 @@ class TabManager {
 			this.selectTab(tab.id);
 		}
 	}
-	clearActive () {
-		var activeTabs = document.querySelectorAll(".tab.active");
-		for (let activeTab of activeTabs) {
-			activeTab.classList.remove("active");
-		}
-	}
 	selectTab (id) {
 		var selectedTab = this.tabs.find(function (tab) {
-			if (tab.id === id) return tab;
+			return tab.id === id;
 		});
 		this.clearActive();
 		Array.from(document.querySelectorAll("span.tab")).find(tabSpan => {
-			if (tabSpan.dataset.for === id) return tabSpan;
+			return tabSpan.dataset.for === id;
 		}).classList.add("active");
 		
 		var children = document.querySelectorAll("section.content > *");
@@ -45,8 +42,50 @@ class TabManager {
 		}
 		document.getElementById(id).classList.remove("hide");
 	}
+	closeTab (id) {
+		var selectedTabIndex = this.tabs.findIndex(function (tab) {
+			return tab.id === id;
+		});
+		
+		if (this.tabs.length === 1) {
+			window.close();
+		}
+		// Select a different tab
+		if (selectedTabIndex === this.tabs.length - 1) {
+			// Last tab
+			this.selectTab(this.tabs[this.tabs.length - 2].id);
+		}
+		else {
+			this.selectTab(this.tabs[selectedTabIndex + 1].id);
+		}
+		
+		// Remove tab header and content
+		var tabHeader = Array.from(document.querySelectorAll("span.tab")).find(tabSpan => {
+			return tabSpan.dataset.for === id;
+		});
+		var tabContent = document.getElementById(id);
+		tabHeader.parentElement.removeChild(tabHeader);
+		tabContent.parentElement.removeChild(tabContent);
+		
+		this.tabs[selectedTabIndex].close();
+		this.tabs.splice(selectedTabIndex, 1);
+	}
+	clearActive () {
+		var activeTabs = document.querySelectorAll(".tab.active");
+		for (let activeTab of activeTabs) {
+			activeTab.classList.remove("active");
+		}
+	}
 	onTabClicked (event) {
-		this.selectTab(event.target.dataset.for);
+		var tabID = event.target.dataset.for;
+		if (event.which === 1) {
+			// Left click selects the tab
+			this.selectTab(tabID);
+		}
+		else if (event.which === 2) {
+			// Middle click closes the tab
+			this.closeTab(tabID);
+		}
 	}
 }
 

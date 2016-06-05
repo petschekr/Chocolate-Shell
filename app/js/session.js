@@ -32,6 +32,9 @@ class Session extends Tab {
 		this.terminal.resize(geometry.cols, geometry.rows);
 		// this.SSH CONNECTION.resize()
 	}
+	close () {
+		// Code to run on tab close goes here
+	}
 	// Events
 	onData (data) {
 		
