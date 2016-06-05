@@ -20,6 +20,13 @@ class TabManager {
 		var tabHeader = document.createElement("span");
 		tabHeader.textContent = tab.title;
 		tabHeader.classList.add("tab");
+		
+		// For Font Awesome close icon
+		var closeIcon = document.createElement("i");
+		closeIcon.classList.add("fa");
+		closeIcon.classList.add("fa-times");
+		tabHeader.appendChild(closeIcon);
+		
 		tabHeader.dataset.for = tab.id;
 		tabHeader.addEventListener("click", this.onTabClicked.bind(this), false);
 		document.querySelector("section.tabs").appendChild(tabHeader);
@@ -79,8 +86,14 @@ class TabManager {
 	onTabClicked (event) {
 		var tabID = event.target.dataset.for;
 		if (event.which === 1) {
-			// Left click selects the tab
-			this.selectTab(tabID);
+			if (tabID) {
+				// Left click selects the tab
+				this.selectTab(tabID);
+			}
+			else if (event.target.classList.contains("fa-times")) {
+				tabID = event.target.parentElement.dataset.for;
+				this.closeTab(tabID);
+			}
 		}
 		else if (event.which === 2) {
 			// Middle click closes the tab

@@ -32,6 +32,7 @@ html, body {
 	padding: @content-padding;
 }
 .tab {
+	position: relative;
 	height: 100%;
 	max-width: @tab-width;
 	
@@ -56,9 +57,33 @@ html, body {
 		border-left: @active-border-size solid @border-active;
 		border-bottom: @bottom-border-size solid rgba(0, 0, 0, 0);
 		box-sizing: initial;
+		i.fa.fa-times {
+			background: linear-gradient(to right, fade(@background-active, 0) 0%,fade(@background-active, 100) 40%,fade(@background-active, 100) 100%);
+			padding-top: 0;
+		}
 	}
 	&:last-of-type {
 		border-right: 1px solid @border-inactive;
+	}
+	&:hover {
+		i.fa.fa-times {
+			opacity: 1;
+		}
+	}
+	i.fa.fa-times {
+		display: flex;
+		align-items: center;
+		
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 0 10px;
+		padding-top: 1px;
+		height: 100%;
+		background: linear-gradient(to right, fade(@background-inactive, 0) 0%,fade(@background-inactive, 100) 40%,fade(@background-inactive, 100) 100%);
+		
+		transition: opacity 200ms;
+		opacity: 0;
 	}
 }
 .hide {
