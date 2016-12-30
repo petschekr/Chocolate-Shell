@@ -10,7 +10,7 @@ module.exports.setDevMenu = function () {
         label: "Development",
         submenu: [{
             label: "Reload",
-            accelerator: "F5",
+            accelerator: "Ctrl+R",
             click: function () {
                 BrowserWindow.getFocusedWindow().reload();
             }
