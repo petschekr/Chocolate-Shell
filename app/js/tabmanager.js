@@ -53,6 +53,9 @@ class TabManager {
 		var selectedTabIndex = this.tabs.findIndex(function (tab) {
 			return tab.id === id;
 		});
+		var closeDenied = this.tabs[selectedTabIndex].close();
+		if (closeDenied === true)
+			return;
 		
 		if (this.tabs.length === 1) {
 			window.close();
@@ -74,7 +77,6 @@ class TabManager {
 		tabHeader.parentElement.removeChild(tabHeader);
 		tabContent.parentElement.removeChild(tabContent);
 		
-		this.tabs[selectedTabIndex].close();
 		this.tabs.splice(selectedTabIndex, 1);
 	}
 	clearActive () {
