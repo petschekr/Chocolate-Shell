@@ -4,14 +4,131 @@
 		<meta charset="utf-8" />
 		<!-- Title is handled by main.js -->
 		<link rel="stylesheet" href="../node_modules/xterm/src/xterm.css" />
+		<link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css" />
 		<link rel="stylesheet" href="fonts/font-awesome.css" />
 		<link rel="stylesheet" href="css/chocolate.css" />
 		<script src="../node_modules/xterm/src/xterm.js"></script>
 		<script src="../node_modules/xterm/addons/fit/fit.js"></script>
 		<script src="js/chocolate.js" defer></script>
+		<script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
 	</head>
-	<body>
+	<body class="mdc-theme--dark">
 		<section class="tabs"></section>
 		<section class="content"></section>
+
+		<template id="newconnection">
+			<section>
+				<ul class="mdc-list mdc-list--two-line">
+					<li class="mdc-list-item">
+						<div class="mdc-form-field mdc-list-item__start-detail">
+							<div class="mdc-checkbox">
+								<input type="checkbox" class="mdc-checkbox__native-control" />
+								<div class="mdc-checkbox__background">
+									<svg version="1.1" class="mdc-checkbox__checkmark"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+										xml:space="preserve">
+										<path class="mdc-checkbox__checkmark__path" fill="none" stroke="white"
+											d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+									</svg>
+									<div class="mdc-checkbox__mixedmark"></div>
+								</div>
+							</div>
+						</div>
+						<span class="mdc-list-item__text">
+							<span class="mdc-list-item__text__primary">UbuntuNAS</span>
+							<span class="mdc-list-item__text__primary">192.168.7.115:22</span>
+						</span>
+					</li>
+					<li class="mdc-list-item">
+						<div class="mdc-form-field mdc-list-item__start-detail">
+							<div class="mdc-checkbox">
+								<input type="checkbox" class="mdc-checkbox__native-control" />
+								<div class="mdc-checkbox__background">
+									<svg version="1.1" class="mdc-checkbox__checkmark"
+										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+										xml:space="preserve">
+										<path class="mdc-checkbox__checkmark__path" fill="none" stroke="white"
+											d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+									</svg>
+									<div class="mdc-checkbox__mixedmark"></div>
+								</div>
+							</div>
+						</div>
+						<span class="mdc-list-item__text">
+							<span class="mdc-list-item__text__primary">PersonalVPS</span>
+							<span class="mdc-list-item__text__primary">ryanpetschek.me:22</span>
+						</span>
+					</li>
+					<li role="separator" class="mdc-list-divider"></li>
+					<li class="mdc-list-item">
+						<button class="mdc-button mdc-button--raised mdc-button--primary mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+							Connect
+						</button>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<div class="mdc-form-field">
+					<div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+					<input id="name" type="text" class="mdc-textfield__input">
+					<label for="name" class="mdc-textfield__label">
+						Nickname
+					</label>
+					</div>
+				</div>
+
+				<div class="mdc-form-field">
+					<div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+					<input id="address" type="text" class="mdc-textfield__input">
+					<label for="address" class="mdc-textfield__label">
+						Address
+					</label>
+					</div>
+				</div>
+
+				<div class="mdc-form-field">
+					<div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+					<input id="address" type="file" class="mdc-textfield__input">
+					<label for="address" class="mdc-textfield__label">
+						Private key
+					</label>
+					</div>
+				</div>
+
+				<button class="mdc-button
+							mdc-button--raised
+							mdc-button--primary
+							mdc-ripple-surface"
+						data-mdc-auto-init="MDCRipple">
+					Add connection
+				</button>
+				
+				<!--<div class="mdc-checkbox" data-mdc-auto-init="MDCCheckbox">
+					<input type="checkbox" class="mdc-checkbox__native-control" />
+					<div class="mdc-checkbox__background">
+						<svg version="1.1" class="mdc-checkbox__checkmark"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+						xml:space="preserve">
+							<path class="mdc-checkbox__checkmark__path" fill="none" stroke="white"
+						d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+						</svg>
+					<div class="mdc-checkbox__mixedmark"></div>
+				</div>-->
+				<div class="mdc-form-field">
+					<div class="mdc-checkbox">
+						<input type="checkbox" class="mdc-checkbox__native-control" id="my-checkbox" />
+						<div class="mdc-checkbox__background">
+							<svg version="1.1" class="mdc-checkbox__checkmark"
+								xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+								xml:space="preserve">
+								<path class="mdc-checkbox__checkmark__path" fill="none" stroke="white"
+									d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+							</svg>
+						<div class="mdc-checkbox__mixedmark"></div>
+					</div>
+				</div>
+	  			<label for="my-checkbox">Label</label>
+			</section>
+		</template>
 	</body>
 </html>

@@ -8,7 +8,7 @@ html {
 }
 
 ::selection {
-  background: @cursor-active;
+	background: @cursor-active;
 }
 html, body {
 	height: 100%;
@@ -22,7 +22,7 @@ html, body {
 	height: @tab-height;
 	width: 100%;
 	background-color: @background-inactive;
-	-webkit-user-select: none;
+	user-select: none;
 	overflow-x: auto;
 	overflow-y: hidden;
 	
@@ -88,6 +88,32 @@ html, body {
 		transition: opacity 200ms;
 		opacity: 0;
 	}
+}
+.newconnection-container {
+	user-select: none;
+
+	h1 {
+		color: @cursor-active;
+	}
+	section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	li.mdc-list-item {
+		.mdc-list-item__start-detail {
+			margin-right: 15px;
+		}
+		span.mdc-list-item__text > span:last-child {
+			font-family: monospace;
+		}
+		button {
+			margin: 0 auto;
+		}
+	}
+}
+:root {
+	--mdc-theme-primary: lighten(@background-active, 25%);
 }
 .hide {
 	display: none;
